@@ -20049,6 +20049,7 @@
   var userDataForm = document.querySelector(".form-user-data");
   var userPasswordForm = document.querySelector(".form-user-password");
   var bookBtn = document.getElementById("book-tour");
+  var searchBtn = document.getElementById("search-game");
   if (leafletMap) {
     const locations = JSON.parse(leafletMap.dataset.locations);
     displayMap(locations);
@@ -20101,6 +20102,15 @@
   var alertMessage = document.querySelector("body").dataset.alert;
   if (alertMessage) {
     showAlert("success", alertMessage, 15);
+  }
+  if (searchBtn) {
+    console.log("yes add event");
+    searchBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name-search-header").value;
+      console.log(window.location);
+      window.location.href = `/game/search/${name}`;
+    });
   }
 })();
 /*! Bundled license information:

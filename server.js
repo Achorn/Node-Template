@@ -1,11 +1,11 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 // eslint-disable-next-line import/no-extraneous-dependencies
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: "./config.env" });
 
-process.on('uncaughtException', (err) => {
-  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+process.on("uncaughtException", (err) => {
+  console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
   console.log(err.name, err.message);
 
   // process.exit(code) 0 success /1 uncaught exception
@@ -13,19 +13,12 @@ process.on('uncaughtException', (err) => {
 });
 
 const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD,
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
 );
-const app = require('./app');
+const app = require("./app");
 
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('DB connection successful!'));
+mongoose.connect(DB).then(() => console.log("DB connection successful!"));
 
 // Description and validation
 
@@ -35,8 +28,8 @@ const server = app.listen(port, () => {
 });
 
 //final global safety net unhandled rejections
-process.on('unhandledRejection', (err) => {
-  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+process.on("unhandledRejection", (err) => {
+  console.log("UNHANDLED REJECTION! 💥 Shutting down...");
   console.log(err.name, err.message);
   // process.exit(code) 0 success /1 uncaught exception
   server.close(() => {
@@ -44,8 +37,8 @@ process.on('unhandledRejection', (err) => {
   });
 });
 
-process.on('uncaughtException', (err) => {
-  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+process.on("uncaughtException", (err) => {
+  console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
   console.log(err.name, err.message);
   // process.exit(code) 0 success /1 uncaught exception
   server.close(() => {
@@ -54,9 +47,9 @@ process.on('uncaughtException', (err) => {
 });
 
 // SIGTERM is used to stop a program from running
-process.on('SIGTERM', () => {
-  console.log('✋ SIGTERM RECIEVED. Shutting down gracefully');
+process.on("SIGTERM", () => {
+  console.log("✋ SIGTERM RECIEVED. Shutting down gracefully");
   server.close(() => {
-    console.log('💥 Process terminated');
+    console.log("💥 Process terminated");
   });
 });
