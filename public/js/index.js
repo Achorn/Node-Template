@@ -4,6 +4,7 @@ import { updateSettings } from "./updateSettings";
 import { displayMap } from "./leafletMap";
 import { bookTour } from "./stripe";
 import { showAlert } from "./alerts";
+import logGame from "./logGame";
 
 // DOM ELEMENTS
 const leafletMap = document.getElementById("map");
@@ -13,6 +14,7 @@ const userDataForm = document.querySelector(".form-user-data");
 const userPasswordForm = document.querySelector(".form-user-password");
 const bookBtn = document.getElementById("book-tour");
 const searchBtn = document.getElementById("search-game");
+const logBtn = document.getElementById("logBtn");
 
 //DELEGATION
 if (leafletMap) {
@@ -77,7 +79,6 @@ if (alertMessage) {
 
 //game search
 if (searchBtn) {
-  console.log("yes add event");
   searchBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const name = document.getElementById("name-search-header").value;
@@ -85,4 +86,45 @@ if (searchBtn) {
     console.log(window.location);
     window.location.href = `/game/search/${name}`;
   });
+}
+
+// log button funcitonality
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+
+const dropdownButton = document.getElementById("dropbtn");
+if (dropdownButton) {
+  dropdownButton.addEventListener("click", (e) => {
+    myFunction();
+  });
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function (event) {
+    if (!event.target.matches(".dropbtn")) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains("show")) {
+          openDropdown.classList.remove("show");
+        }
+      }
+    }
+  };
+}
+const wantToPlay = document.getElementById("wantToPlayUpdate");
+const havePlayedUPdate = document.getElementById("havePlayedUpdatePlayed");
+const deleteRelationship = document.getElementById("deleteRelationship");
+
+logBtn?.addEventListener("click", updateRelationship);
+wantToPlay?.addEventListener("click", updateRelationship);
+havePlayedUPdate?.addEventListener("click", updateRelationship);
+deleteRelationship?.addEventListener("click", updateRelationship);
+
+function updateRelationship(e) {
+  e.preventDefault;
+  logGame(e.target.dataset);
 }

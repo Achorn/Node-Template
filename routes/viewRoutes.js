@@ -13,8 +13,12 @@ router.get(
   authController.isLoggedIn,
   viewsController.getOverview
 );
-router.get("/game/search/:name", viewsController.getGameSearch);
-router.get("/game/:id", viewsController.getGame);
+router.get(
+  "/game/search/:name",
+  authController.isLoggedIn,
+  viewsController.getGameSearch
+);
+router.get("/game/:id", authController.isLoggedIn, viewsController.getGame);
 
 router.get("/tour/:slug", authController.isLoggedIn, viewsController.getTour);
 router.get("/login", authController.isLoggedIn, viewsController.getLoginForm);

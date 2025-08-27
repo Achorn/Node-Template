@@ -20042,6 +20042,25 @@
     }
   };
 
+  // public/js/logGame.js
+  var logGame_default = logGame = async (args) => {
+    const { game, relationship, experience, rest } = args;
+    const url = relationship ? `/api/v1/relationships/${relationship}` : `/api/v1/relationships`;
+    try {
+      const res = await axios_default({
+        method: rest,
+        url,
+        data: { game, experience, relationship }
+      });
+      if (res.data.status === "success") {
+        location.reload();
+        showAlert("success", `${rest} successfully!`);
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
+    }
+  };
+
   // public/js/index.js
   var leafletMap = document.getElementById("map");
   var loginForm = document.querySelector(".form--login");
@@ -20050,6 +20069,7 @@
   var userPasswordForm = document.querySelector(".form-user-password");
   var bookBtn = document.getElementById("book-tour");
   var searchBtn = document.getElementById("search-game");
+  var logBtn = document.getElementById("logBtn");
   if (leafletMap) {
     const locations = JSON.parse(leafletMap.dataset.locations);
     displayMap(locations);
@@ -20104,13 +20124,44 @@
     showAlert("success", alertMessage, 15);
   }
   if (searchBtn) {
-    console.log("yes add event");
     searchBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const name = document.getElementById("name-search-header").value;
       console.log(window.location);
       window.location.href = `/game/search/${name}`;
     });
+  }
+  var dropdownButton = document.getElementById("dropbtn");
+  if (dropdownButton) {
+    let myFunction = function() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    };
+    dropdownButton.addEventListener("click", (e) => {
+      myFunction();
+    });
+    window.onclick = function(event) {
+      if (!event.target.matches(".dropbtn")) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains("show")) {
+            openDropdown.classList.remove("show");
+          }
+        }
+      }
+    };
+  }
+  var wantToPlay = document.getElementById("wantToPlayUpdate");
+  var havePlayedUPdate = document.getElementById("havePlayedUpdatePlayed");
+  var deleteRelationship = document.getElementById("deleteRelationship");
+  logBtn?.addEventListener("click", updateRelationship);
+  wantToPlay?.addEventListener("click", updateRelationship);
+  havePlayedUPdate?.addEventListener("click", updateRelationship);
+  deleteRelationship?.addEventListener("click", updateRelationship);
+  function updateRelationship(e) {
+    e.preventDefault;
+    logGame_default(e.target.dataset);
   }
 })();
 /*! Bundled license information:

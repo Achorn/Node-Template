@@ -3,7 +3,12 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const User = require("../models/userModel");
 const Booking = require("../models/bookingModel");
-const axios = require("axios");
+const {
+  getGiantBombGameSearch,
+  getGiantBombGame,
+} = require("../utils/giantBombGameHelper");
+const Relationship = require("../models/relationshipModel");
+
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
   if (alert === "booking")
@@ -79,55 +84,32 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
   res.status(200).render("account", { title: "Account", user: updatedUser });
 });
 
-exports.getGame = catchAsync(async (req, res, next) => {
-  console.log("getting game");
-  let gameId = req.params.id;
-  try {
-    const giantBombURL = `http://www.giantbomb.com/api/game/${gameId}/?api_key=${process.env.GIANT_BOMB_API_KEY}&format=json`;
-    console.log({ giantBombURL });
-    const result = await axios({
-      method: "GET",
-      url: giantBombURL,
-    });
-    console.log("after fetch");
-    // console.log(res.data);
-    if (result.data.error === "ok") console.log("success");
-
-    // console.log("data :");
-    // console.log(res.data.results);
-    let game = result.data.results;
-    console.log(game.name);
-    res.status(200).render("game", {
-      title: `${game.name}`,
-      game,
-    });
-  } catch (err) {
-    console.log({ err });
-    return next(new AppError("There is no game with that id", 404));
-  }
-  // 1) get data from giantbomb
-  // http://www.giantbomb.com/api/game/3030-21268/?api_key=db6653f30c6fd574d86a82d15149c97a820c7891&format=json&field_list=genres,name
-  // 2) get supplemental data from our reviews model
-  // 3) render template using data
-});
-
 exports.getGameSearch = catchAsync(async (req, res, next) => {
   try {
     const name = req.params.name;
     const page = req.params.page || 1;
-    const giantBombURL = `http://www.giantbomb.com/api/search/?api_key=${process.env.GIANT_BOMB_API_KEY}&format=json&query="${name}"&resources=game`;
-    console.log(giantBombURL);
-    const result = await axios({
-      method: "GET",
-      url: giantBombURL,
-    });
-
-    // console.log(res.data);
-    if (result.data.error === "ok") console.log("success");
-    searchResults = result.data.results;
+    searchResults = await getGiantBombGameSearch(name, page);
     res.status(200).render("search", {
       title: `search results`,
       searchResults,
     });
   } catch (err) {}
+});
+
+exports.getGame = catchAsync(async (req, res, next) => {
+  //get giantgame game info
+  let gameId = req.params.id;
+
+  let game = await getGiantBombGame(gameId);
+  if (!game) return next(new AppError("There is no game with that id", 404));
+  // 2) get supplemental data from our reviews model
+  // 3) render template using data
+
+  const relationships = await Relationship.find({ game: gameId });
+  game.relationships = relationships;
+
+  res.status(200).render("game", {
+    title: `${game.name}`,
+    game,
+  });
 });
