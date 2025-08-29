@@ -1,22 +1,22 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-const nodemailer = require('nodemailer');
-const pug = require('pug');
-const { htmlToText } = require('html-to-text');
-const BrevoTransport = require('nodemailer-brevo-transport');
+const nodemailer = require("nodemailer");
+const pug = require("pug");
+const { htmlToText } = require("html-to-text");
+const BrevoTransport = require("nodemailer-brevo-transport");
 
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
-    this.firstName = user.name.split(' ')[0];
+    this.firstName = user.name.split(" ")[0];
     this.url = url;
     this.from = `Jonas Schemtmann <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       // brevo
       return nodemailer.createTransport(
-        new BrevoTransport({ apiKey: process.env.BREVO_API }),
+        new BrevoTransport({ apiKey: process.env.BREVO_API })
       );
     }
     return nodemailer.createTransport({
@@ -49,13 +49,13 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send('welcome', 'Welcome to the Natours Family');
+    await this.send("welcome", "Welcome to the Gamurel Community");
   }
 
   async sendPasswordReset() {
     await this.send(
-      'passwordReset',
-      'Your password reset token (valid for only 10 minutes)',
+      "passwordReset",
+      "Your password reset token (valid for only 10 minutes)"
     );
   }
 };

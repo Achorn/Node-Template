@@ -11,7 +11,6 @@ block append head
     crossorigin="")
 
 mixin reviewCard(review)
-  h4 hello
   .reviews__card
     .reviews__avatar
       //- img.reviews__avatar-img(src=`/img/users/${review.user.photo}`, alt=review.user.name)
@@ -24,8 +23,6 @@ mixin reviewCard(review)
 
 
 mixin relationshipButton(user,relationship)
- -console.log(relationship)
- 
   div.log--container
     if user
       if relationship 
@@ -45,7 +42,6 @@ mixin relationshipButton(user,relationship)
       button#logBtn(disabled=!!relationship).dropbtn= "Login to Log"
 
 
-
 mixin overviewBox(label, text, icon)
   .overview-box__detail
     svg.overview-box__icon
@@ -55,6 +51,7 @@ mixin overviewBox(label, text, icon)
 
 block content
   - const userRelationship = !!user && game.relationships.find(rel => rel.user.id === user.id)
+  - const gameReviews = game.relationships.filter(rel => !!rel.rating)
   section.section-description
     .overview-box
       div
@@ -62,20 +59,15 @@ block content
           h2.heading-secondary.ma-bt-lg= `${game.name}`
 
             img(src=`${game.image.medium_url}`)
-            //- img(src=`${game.image.screen_url}`)
-            //- img(src=`${game.image.screen_large_url}`)
-            //- img(src=`${game.image.small_url}`)
-            //- img(src=`${game.image.super_url}`)
-            //- img(src=`${game.image.thumb_url}`)
-            //- img(src=`${game.image.tiny_url}`)
-            //- img(src=`${game.image.original_url}`)
+        
 
           - const date = new Date(game.original_release_date).toLocaleString('en-us',{month: 'long',day:'numeric', year: 'numeric'})
           +overviewBox('Release Date', date, 'calendar')
-          //- +overviewBox('Difficulty', tour.difficulty, 'trending-up')
-          //- +overviewBox('Participants', `${tour.maxGroupSize} people`, 'user')
-          //- +overviewBox('Rating', `${tour.ratingsAverage}/5`, 'star')
         +relationshipButton(user,userRelationship)
+        //- if relationship
+          a(href=`/relationship/edit/${relationship.id}`) Review
+        if !!userRelationship && userRelationship.experience === 'played'
+          a(href=`/relationship/edit/${userRelationship.id}`) Review
   div
-    each relationship in game.relationships 
-      +reviewCard(relationship)
+    each review in gameReviews 
+      +reviewCard(review)

@@ -113,3 +113,22 @@ exports.getGame = catchAsync(async (req, res, next) => {
     game,
   });
 });
+
+exports.getRelationshipForm = catchAsync(async (req, res, next) => {
+  let relationshipId = req.params.id;
+
+  let relationship = await Relationship.findOne({ _id: relationshipId });
+  if (!relationship) {
+    return next(new AppError("There is no review with that id", 404));
+  }
+
+  let game = await getGiantBombGame(relationship.game);
+  if (!game) return next(new AppError("There is no game with that id", 404));
+  // let game = await getGiantBombGame(relationship.game);
+  res.status(200).render("editRelationship", {
+    // title: `edit relationship`,
+    relationship,
+    title: `${game.name}`,
+    game,
+  });
+});

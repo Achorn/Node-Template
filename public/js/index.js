@@ -4,7 +4,7 @@ import { updateSettings } from "./updateSettings";
 import { displayMap } from "./leafletMap";
 import { bookTour } from "./stripe";
 import { showAlert } from "./alerts";
-import logGame from "./logGame";
+import { logGame, editLog } from "./logGame";
 
 // DOM ELEMENTS
 const leafletMap = document.getElementById("map");
@@ -15,6 +15,7 @@ const userPasswordForm = document.querySelector(".form-user-password");
 const bookBtn = document.getElementById("book-tour");
 const searchBtn = document.getElementById("search-game");
 const logBtn = document.getElementById("logBtn");
+const reviewForm = document.querySelector(".form--review");
 
 //DELEGATION
 if (leafletMap) {
@@ -83,7 +84,6 @@ if (searchBtn) {
     e.preventDefault();
     const name = document.getElementById("name-search-header").value;
     //redirect to
-    console.log(window.location);
     window.location.href = `/game/search/${name}`;
   });
 }
@@ -125,6 +125,16 @@ havePlayedUPdate?.addEventListener("click", updateRelationship);
 deleteRelationship?.addEventListener("click", updateRelationship);
 
 function updateRelationship(e) {
-  e.preventDefault;
+  e.preventDefault();
   logGame(e.target.dataset);
 }
+
+reviewForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const review = document.getElementById("review").value;
+  const rating = Number(document.getElementById("rating").value);
+  const relationship = document.getElementById("relationshipId").value;
+  const game = document.getElementById("gameId").value;
+
+  editLog(review, rating, relationship, game);
+});

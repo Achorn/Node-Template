@@ -7,7 +7,7 @@ module.exports.getGiantBombGameSearch = async (name, page = 1) => {
     url: giantBombURL,
   });
   // console.log(res.data);
-  if (result.data.error === "ok") console.log("success");
+
   searchResults = result.data.results;
 
   return searchResults;

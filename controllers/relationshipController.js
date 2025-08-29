@@ -10,5 +10,25 @@ exports.setGameUserId = (req, res, next) => {
 };
 
 exports.createRelationship = factory.createOne(Relationship);
-
 exports.getRelationships = factory.getAll(Relationship);
+exports.deleteRelationship = factory.deleteOne(Relationship);
+
+exports.updateRelationship = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, "review", "experience", "rating");
+  const updatedRelationship = await Relationship.findByIdAndUpdate(
+    req.params.id,
+    filteredBody,
+    { new: true, runValidators: true }
+  );
+  res
+    .status(200)
+    .json({ status: "success", data: { relationship: updatedRelationship } });
+});
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((key) => {
+    if (allowedFields.includes(key)) newObj[key] = obj[key];
+  });
+  return newObj;
+};

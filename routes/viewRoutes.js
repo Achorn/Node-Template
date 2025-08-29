@@ -6,22 +6,15 @@ const authController = require("../controllers/authController");
 const router = express.Router();
 
 router.use(viewsController.alerts);
+router.use(authController.isLoggedIn);
 
-router.get(
-  "/",
-  // bookingController.createBookingCheckout,
-  authController.isLoggedIn,
-  viewsController.getOverview
-);
-router.get(
-  "/game/search/:name",
-  authController.isLoggedIn,
-  viewsController.getGameSearch
-);
-router.get("/game/:id", authController.isLoggedIn, viewsController.getGame);
+router.get("/", viewsController.getOverview);
+router.get("/game/search/:name", viewsController.getGameSearch);
+router.get("/game/:id", viewsController.getGame);
 
-router.get("/tour/:slug", authController.isLoggedIn, viewsController.getTour);
-router.get("/login", authController.isLoggedIn, viewsController.getLoginForm);
+router.get("/relationship/edit/:id", viewsController.getRelationshipForm);
+router.get("/tour/:slug", viewsController.getTour);
+router.get("/login", viewsController.getLoginForm);
 router.get("/me", authController.protect, viewsController.getAccount);
 router.get("/my-tours", authController.protect, viewsController.getMyTours);
 

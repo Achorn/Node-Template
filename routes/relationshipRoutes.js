@@ -14,4 +14,17 @@ router
   )
   .get(relationshipController.getRelationships);
 
+router
+  .route("/:id")
+  .patch(
+    authController.protect,
+    authController.restrictTo("user", "admin"),
+    relationshipController.updateRelationship
+  )
+  .delete(
+    authController.protect,
+    authController.restrictTo("user", "admin"),
+    relationshipController.deleteRelationship
+  );
+
 module.exports = router;

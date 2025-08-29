@@ -18,10 +18,9 @@ const relationshipSchema = mongoose.Schema({
   },
   experience: {
     type: String,
-    enum: ["want-to-play", "have-played"],
+    enum: ["want-to-play", "played"],
     required: [true, "Please select 'Want to play' or 'Have played'."],
   },
-
   rating: {
     type: Number,
     min: 1,
@@ -31,14 +30,14 @@ const relationshipSchema = mongoose.Schema({
     type: String,
     min: 5,
     max: 1000,
-    validate: {
-      validator: function () {
-        console.log("am i validating the review with the rating?");
-        console.log(this.rating);
-        return !!this.rating;
-      },
-      message: "A review needs a rating",
-    },
+    // validate: {
+    //   validator: function () {
+    //     console.log("am i validating the review with the rating?");
+    //     console.log(this.rating);
+    //     return !!this.rating;
+    //   },
+    //   message: "A review needs a rating",
+    // },
   },
   user: {
     type: mongoose.Schema.ObjectId,

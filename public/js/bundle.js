@@ -20043,8 +20043,10 @@
   };
 
   // public/js/logGame.js
-  var logGame_default = logGame = async (args) => {
+  var logGame = async (args) => {
     const { game, relationship, experience, rest } = args;
+    console.log("logging game");
+    console.log(args);
     const url = relationship ? `/api/v1/relationships/${relationship}` : `/api/v1/relationships`;
     try {
       const res = await axios_default({
@@ -20052,9 +20054,31 @@
         url,
         data: { game, experience, relationship }
       });
-      if (res.data.status === "success") {
+      console.log({ res });
+      if (res.status === 204 || res.data.status === "success") {
         location.reload();
         showAlert("success", `${rest} successfully!`);
+      } else {
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
+    }
+  };
+  var editLog = async (review, rating, relationship, game) => {
+    const url = `/api/v1/relationships/${relationship}`;
+    console.log({ rating });
+    try {
+      const res = await axios_default({
+        method: "PATCH",
+        url,
+        data: { review, rating }
+      });
+      console.log({ res });
+      if (res.data.status === "success") {
+        location.reload();
+        showAlert("success", `PATCH successfully!`);
+        window.location.href = `/game/${game}`;
+      } else {
       }
     } catch (err) {
       showAlert("error", err.response.data.message);
@@ -20070,6 +20094,7 @@
   var bookBtn = document.getElementById("book-tour");
   var searchBtn = document.getElementById("search-game");
   var logBtn = document.getElementById("logBtn");
+  var reviewForm = document.querySelector(".form--review");
   if (leafletMap) {
     const locations = JSON.parse(leafletMap.dataset.locations);
     displayMap(locations);
@@ -20160,9 +20185,18 @@
   havePlayedUPdate?.addEventListener("click", updateRelationship);
   deleteRelationship?.addEventListener("click", updateRelationship);
   function updateRelationship(e) {
-    e.preventDefault;
-    logGame_default(e.target.dataset);
+    e.preventDefault();
+    logGame(e.target.dataset);
   }
+  reviewForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    console.log(e);
+    const review = document.getElementById("review").value;
+    const rating = Number(document.getElementById("rating").value);
+    const relationship = document.getElementById("relationshipId").value;
+    const game = document.getElementById("gameId").value;
+    editLog(review, rating, relationship, game);
+  });
 })();
 /*! Bundled license information:
 
