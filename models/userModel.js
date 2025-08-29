@@ -6,12 +6,26 @@ const bcrypt = require("bcryptjs");
 
 // name, email, photo(string), password, password-confirm
 
+const isUsername = (v) => {
+  console.log("is testing username?");
+  return /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/.test(v);
+};
+
 // schema
 const userSchema = mongoose.Schema({
-  name: {
+  username: {
     type: String,
-    required: [true, "Please tell us your name"],
-    // unique: true,
+    validate: {
+      validator: isUsername,
+      message: (props) => `${props.value} is not a valid username!`,
+    },
+    required: [true, "Please give us a username"],
+    unique: true,
+    index: {
+      // uniquness with case sensitivity
+      unique: true,
+      collation: { locale: "en", strength: 2 },
+    },
   },
   email: {
     type: String,
@@ -62,6 +76,7 @@ userSchema.pre("save", async function (next) {
 
   next();
 });
+
 userSchema.pre("save", async function (next) {
   //exit if password wasnt modified or if user is newly created
   if (!this.isModified("password") || this.isNew) return next();

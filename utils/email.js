@@ -7,9 +7,9 @@ const BrevoTransport = require("nodemailer-brevo-transport");
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
-    this.firstName = user.name.split(" ")[0];
+    this.username = user.username;
     this.url = url;
-    this.from = `Jonas Schemtmann <${process.env.EMAIL_FROM}>`;
+    this.from = `Joshua Achorn <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
@@ -32,7 +32,7 @@ module.exports = class Email {
   async send(template, subject) {
     // 1) Render HTML based on pug template
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
-      firstName: this.firstName,
+      username: this.username,
       url: this.url,
       subject,
     });

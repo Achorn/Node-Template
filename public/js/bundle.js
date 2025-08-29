@@ -20045,8 +20045,6 @@
   // public/js/logGame.js
   var logGame = async (args) => {
     const { game, relationship, experience, rest } = args;
-    console.log("logging game");
-    console.log(args);
     const url = relationship ? `/api/v1/relationships/${relationship}` : `/api/v1/relationships`;
     try {
       const res = await axios_default({
@@ -20054,7 +20052,6 @@
         url,
         data: { game, experience, relationship }
       });
-      console.log({ res });
       if (res.status === 204 || res.data.status === "success") {
         location.reload();
         showAlert("success", `${rest} successfully!`);
@@ -20066,16 +20063,13 @@
   };
   var editLog = async (review, rating, relationship, game) => {
     const url = `/api/v1/relationships/${relationship}`;
-    console.log({ rating });
     try {
       const res = await axios_default({
         method: "PATCH",
         url,
         data: { review, rating }
       });
-      console.log({ res });
       if (res.data.status === "success") {
-        location.reload();
         showAlert("success", `PATCH successfully!`);
         window.location.href = `/game/${game}`;
       } else {
@@ -20152,7 +20146,6 @@
     searchBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const name = document.getElementById("name-search-header").value;
-      console.log(window.location);
       window.location.href = `/game/search/${name}`;
     });
   }
@@ -20190,7 +20183,6 @@
   }
   reviewForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    console.log(e);
     const review = document.getElementById("review").value;
     const rating = Number(document.getElementById("rating").value);
     const relationship = document.getElementById("relationshipId").value;
