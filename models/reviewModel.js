@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
-const Tour = require('./tourModel');
+const mongoose = require("mongoose");
+const Tour = require("./tourModel");
 
 const reviewSchema = mongoose.Schema(
   {
     review: {
       type: String,
-      required: [true, 'Review can not be empty!'],
+      required: [true, "Review can not be empty!"],
       min: 50,
       max: 1000,
     },
@@ -13,31 +13,31 @@ const reviewSchema = mongoose.Schema(
       type: Number,
       min: 1,
       max: 5,
-      required: [true, 'Review can not be empty!'],
+      required: [true, "Review can not be empty!"],
     },
     createdAt: { type: Date, default: Date.now },
     tour: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Tour',
-      required: [true, 'Review must belong to a tour.'],
+      ref: "Tour",
+      required: [true, "Review must belong to a tour."],
     },
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: [true, 'Review must belong to a user.'],
+      ref: "User",
+      required: [true, "Review must belong to a user."],
     },
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  },
+  }
 );
 
 // max one review for one tour
 reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
 
 reviewSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'user', select: 'name photo -_id' });
+  this.populate({ path: "user", select: "name photo -_id" });
   next();
 });
 
@@ -50,9 +50,9 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
     },
     {
       $group: {
-        _id: '$tour',
+        _id: "$tour",
         nRating: { $sum: 1 },
-        avgRating: { $avg: '$rating' },
+        avgRating: { $avg: "$rating" },
       },
     },
   ]);
@@ -70,7 +70,7 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
   }
 };
 
-reviewSchema.post('save', function (next) {
+reviewSchema.post("save", function (next) {
   //this = current review
   this.constructor.calcAverageRatings(this.tour);
 });
@@ -88,6 +88,6 @@ reviewSchema.post(/^findOneAnd/, async function () {
   this.r.constructor.calcAverageRatings(this.r.tour);
 });
 
-const Review = mongoose.model('Review', reviewSchema);
+const Review = mongoose.model("Review", reviewSchema);
 
 module.exports = Review;

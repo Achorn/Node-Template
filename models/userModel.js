@@ -62,7 +62,15 @@ const userSchema = mongoose.Schema({
   passwordResetExpires: Date,
   active: { type: Boolean, default: true, select: false },
 });
+
+userSchema.set("toObject", { virtuals: true });
+userSchema.set("toJSON", { virtuals: true });
 // model
+userSchema.virtual("following", {
+  ref: "Following",
+  foreignField: "user",
+  localField: "_id",
+});
 
 userSchema.pre("save", async function (next) {
   // only run this function is password was modified
@@ -86,6 +94,12 @@ userSchema.pre("save", async function (next) {
 });
 
 // 141 Security best practices
+userSchema.pre(/^find/, async function (next) {
+  // this points to the current quiery
+  this.find().populate("following");
+  next();
+});
+
 userSchema.pre(/^find/, async function (next) {
   // this points to the current quiery
   this.find({ active: { $ne: false } });

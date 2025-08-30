@@ -19,6 +19,8 @@ const reviewRouter = require("./routes/reviewRoutes");
 const relationshipRouter = require("./routes/relationshipRoutes");
 const gameRouter = require("./routes/gameRoutes");
 
+const followerRouter = require("./routes/followerRoutes");
+
 const bookingRouter = require("./routes/bookingRoutes");
 const bookingController = require("./controllers/bookingController");
 const globalErrorHandler = require("./controllers/errorController");
@@ -139,6 +141,7 @@ app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/bookings", bookingRouter);
 app.use("/api/v1/relationships", relationshipRouter);
 app.use("/api/v1/games", gameRouter);
+app.use("/api/v1/followers", followerRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl}`, 404));

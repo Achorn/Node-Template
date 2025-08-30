@@ -26,6 +26,8 @@ block content
               +navItem('#', 'Manage reviews','star',false)
               +navItem('#', 'Manage bookings','briefcase',false)
       .user-view__content
+        h1 following
+        -console.log(user)
         .user-view__form-container
           h2.heading-secondary.ma-bt-md Your account settings
           //- Without API
@@ -35,8 +37,8 @@ block content
           //- With API
           form.form.form-user-data
             .form__group
-              label.form__label(for='name') Name
-              input#name.form__input(type='text', value=`${user.name}`, required, name='name')
+              label.form__label(for='username') Username
+              input#name.form__input(type='text', value=`${user.username}`, required, name='username')
             .form__group.ma-bt-md
               label.form__label(for='email') Email address
               input#email.form__input(type='email', value=`${user.email}`, required,name='email')

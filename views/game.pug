@@ -50,7 +50,7 @@ mixin overviewBox(label, text, icon)
     span.overview-box__text= text
 
 block content
-  - const userRelationship = !!user && game.relationships.find(rel => rel.user.id === user.id)
+  - const userRelationship = !!user && game.relationships && game.relationships.find(rel => rel.user.id === user.id)
   - const gameReviews = game.relationships.filter(rel => !!rel.rating)
   section.section-description
     .overview-box
