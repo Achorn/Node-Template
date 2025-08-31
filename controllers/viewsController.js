@@ -136,3 +136,19 @@ exports.getRelationshipForm = catchAsync(async (req, res, next) => {
     game,
   });
 });
+
+exports.getUserPage = catchAsync(async (req, res, next) => {
+  const username = req.params.username;
+  const selectedUser = await User.findOne({ username });
+
+  if (!selectedUser) return next(new AppError("Cant find user", 404));
+
+  //check is user is logged in and if user is self
+  // do something with that later
+
+  res.status(200).render("user", {
+    title: username,
+    selectedUser,
+    // game,
+  });
+});

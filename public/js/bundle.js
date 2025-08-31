@@ -20079,6 +20079,42 @@
     }
   };
 
+  // public/js/followingApi.js
+  var followUser = async (userId) => {
+    try {
+      const res = await axios_default({
+        method: "POST",
+        url: "/api/v1/followers",
+        data: {
+          following: userId
+        }
+      });
+      if (res.data.status === "success") {
+        location.reload();
+        showAlert("success", "Followed user");
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
+    }
+  };
+  var unfollowUser = async (followId) => {
+    console.log("trying to unfollow...");
+    const url = "/api/v1/followers/" + followId;
+    console.log(url);
+    try {
+      const res = await axios_default({
+        method: "DELETE",
+        url
+      });
+      if (res.status === 204) {
+        location.reload();
+        showAlert("success", "Unfollowed user");
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
+    }
+  };
+
   // public/js/index.js
   var leafletMap = document.getElementById("map");
   var loginForm = document.querySelector(".form--login");
@@ -20089,6 +20125,8 @@
   var searchBtn = document.getElementById("search-game");
   var logBtn = document.getElementById("logBtn");
   var reviewForm = document.querySelector(".form--review");
+  var followForm = document.querySelector(".form--follow");
+  var unfollowForm = document.querySelector(".form--unfollow");
   if (leafletMap) {
     const locations = JSON.parse(leafletMap.dataset.locations);
     displayMap(locations);
@@ -20188,6 +20226,16 @@
     const relationship = document.getElementById("relationshipId").value;
     const game = document.getElementById("gameId").value;
     editLog(review, rating, relationship, game);
+  });
+  followForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const userId = document.getElementById("selectedUserId").value;
+    followUser(userId);
+  });
+  unfollowForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const followingId = document.getElementById("followingId").value;
+    unfollowUser(followingId);
   });
 })();
 /*! Bundled license information:

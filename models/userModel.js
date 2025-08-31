@@ -70,6 +70,7 @@ userSchema.virtual("following", {
   ref: "Following",
   foreignField: "user",
   localField: "_id",
+  justOne: false,
 });
 
 userSchema.pre("save", async function (next) {

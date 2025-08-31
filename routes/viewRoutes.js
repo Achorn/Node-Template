@@ -19,6 +19,7 @@ router.get("/signup", viewsController.getSignupForm);
 
 router.get("/me", authController.protect, viewsController.getAccount);
 router.get("/my-tours", authController.protect, viewsController.getMyTours);
+router.get("/user/:username", viewsController.getUserPage);
 
 router.post(
   "/submit-user-data",

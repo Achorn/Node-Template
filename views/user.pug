@@ -1,0 +1,29 @@
+extends base
+
+mixin unfollowForm(followingId)
+  form.form--unfollow
+    input#followingId.form__input(type='hidden' value=followingId)
+    button Unfollow
+
+mixin followForm(selectedUserId)
+  form.form--follow
+    input#selectedUserId.form__input(type='hidden' value=selectedUserId)
+    button Follow
+
+mixin followButton(user,selectedUser)
+  if !user
+    button Sign in to follow
+  else
+    - const followingFound = user.following.find((element) => JSON.stringify(element.following) == JSON.stringify(selectedUser._id));
+    if followingFound
+      - const followingId = followingFound.id
+      +unfollowForm(followingId)
+    else 
+      +followForm(selectedUser.id)
+
+
+
+block content 
+  h1= `${selectedUser.username}`
+  +followButton(user, selectedUser)
+  h2 games below

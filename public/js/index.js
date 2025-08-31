@@ -5,6 +5,7 @@ import { displayMap } from "./leafletMap";
 import { bookTour } from "./stripe";
 import { showAlert } from "./alerts";
 import { logGame, editLog } from "./logGame";
+import { followUser, unfollowUser } from "./followingApi";
 
 // DOM ELEMENTS
 const leafletMap = document.getElementById("map");
@@ -16,6 +17,8 @@ const bookBtn = document.getElementById("book-tour");
 const searchBtn = document.getElementById("search-game");
 const logBtn = document.getElementById("logBtn");
 const reviewForm = document.querySelector(".form--review");
+const followForm = document.querySelector(".form--follow");
+const unfollowForm = document.querySelector(".form--unfollow");
 
 //DELEGATION
 if (leafletMap) {
@@ -137,4 +140,16 @@ reviewForm?.addEventListener("submit", async (e) => {
   const game = document.getElementById("gameId").value;
 
   editLog(review, rating, relationship, game);
+});
+
+followForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const userId = document.getElementById("selectedUserId").value;
+  followUser(userId);
+});
+
+unfollowForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const followingId = document.getElementById("followingId").value;
+  unfollowUser(followingId);
 });
