@@ -44,6 +44,8 @@ const relationshipSchema = mongoose.Schema({
     ref: "User",
     required: [true, "Relationship must belong to a user."],
   },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
 relationshipSchema.index({ game: 1, user: 1 }, { unique: true });

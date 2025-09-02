@@ -15,6 +15,7 @@ exports.deleteRelationship = factory.deleteOne(Relationship);
 
 exports.updateRelationship = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, "review", "experience", "rating");
+  filteredBody.updatedAt = Date.now();
   const updatedRelationship = await Relationship.findByIdAndUpdate(
     req.params.id,
     filteredBody,

@@ -6,6 +6,9 @@ const Booking = require("../models/bookingModel");
 const {
   getGiantBombGameSearch,
   getGiantBombGame,
+  guidsToIds,
+  getGiantBombGames,
+  linkRelationshipsToGames,
 } = require("../utils/giantBombGameHelper");
 const Relationship = require("../models/relationshipModel");
 
@@ -146,9 +149,18 @@ exports.getUserPage = catchAsync(async (req, res, next) => {
   //check is user is logged in and if user is self
   // do something with that later
 
+  //get list of games
+  let relationships = await Relationship.find({ user: selectedUser._id });
+  const gameIds = guidsToIds(relationships.map((rel) => rel.game));
+  const games = await getGiantBombGames(gameIds);
+
+  // relationships =
+  relationships = linkRelationshipsToGames(relationships, games);
+
   res.status(200).render("user", {
     title: username,
     selectedUser,
+    relationships,
     // game,
   });
 });

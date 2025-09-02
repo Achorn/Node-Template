@@ -26,4 +26,14 @@ mixin followButton(user,selectedUser)
 block content 
   h1= `${selectedUser.username}`
   +followButton(user, selectedUser)
-  h2 games below
+
+  h2 Played 
+    span= ` ${relationships.filter(rel => rel.experience ==='played').length}`
+  h2 Want To Play 
+    span= ` ${relationships.filter(rel => rel.experience ==='want-to-play').length}`
+
+  h2 Recent Activity 
+  - const relByDate = relationships.sort((a, b) => a.updatedAt - b.updatedAt)
+
+  each relationship in relByDate 
+    h3= `${relationship.gameInfo.name}`
