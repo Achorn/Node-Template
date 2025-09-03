@@ -12,7 +12,6 @@ exports.createFollower = factory.createOne(Follower);
 exports.getFollower = factory.getOne(Follower);
 
 exports.deleteFollower = catchAsync(async (req, res, next) => {
-  console.log("custom delete");
   const doc = await Follower.findOneAndDelete({
     _id: req.params.id,
     user: req.user,

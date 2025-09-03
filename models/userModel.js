@@ -7,7 +7,6 @@ const bcrypt = require("bcryptjs");
 // name, email, photo(string), password, password-confirm
 
 const isUsername = (v) => {
-  console.log("is testing username?");
   return /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/.test(v);
 };
 

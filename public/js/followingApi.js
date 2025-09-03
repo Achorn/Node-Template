@@ -21,9 +21,7 @@ export const followUser = async (userId) => {
 };
 
 export const unfollowUser = async (followId) => {
-  console.log("trying to unfollow...");
   const url = "/api/v1/followers/" + followId;
-  console.log(url);
   try {
     const res = await axios({
       method: "DELETE",

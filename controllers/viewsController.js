@@ -41,7 +41,6 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   // get list of game ids
   let gameIds = [...new Set(relationships.map((rel) => rel.game))];
   gameIds = guidsToIds(gameIds);
-  console.log(gameIds);
   const games = await getGiantBombGames(gameIds);
 
   relationships = linkRelationshipsToGames(relationships, games);
