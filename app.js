@@ -89,11 +89,11 @@ const limiter = rateLimit({
   max: 100,
   windowms: 60 * 60 * 1000,
   message: "Too many requests from this IP, please try again in an hour.",
-  validate: { xForwardedForHeader: false },
+  // validate: { xForwardedForHeader: false },
 });
 
 app.use("/api", limiter);
-// app.set("trust proxy", 1); // Example: trusting one proxy hop
+app.set("trust proxy", 1); // Example: trusting one proxy hop
 
 // not in booking routes as the body is a steam in raw form. dont want it changed by body parser below
 app.post(
