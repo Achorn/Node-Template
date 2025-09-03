@@ -19958,6 +19958,30 @@
       showAlert("error", err.response.data.message);
     }
   };
+  var signup = async (email, username, password, passwordConfirm) => {
+    try {
+      const res = await axios_default({
+        method: "POST",
+        url: "/api/v1/users/signup",
+        data: {
+          email,
+          username,
+          password,
+          passwordConfirm
+        }
+      });
+      console.log("yeah?");
+      if (res.data.status === "success") {
+        console.log("success?");
+        showAlert("success", "Logged in successfully!");
+        window.setTimeout(() => {
+          location.assign("/");
+        }, 1500);
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
+    }
+  };
   var logout = async () => {
     try {
       const res = await axios_default({
@@ -20118,6 +20142,7 @@
   // public/js/index.js
   var leafletMap = document.getElementById("map");
   var loginForm = document.querySelector(".form--login");
+  var signupForm = document.querySelector(".form--signup");
   var logOutBtn = document.querySelector(".nav__el--logout");
   var userDataForm = document.querySelector(".form-user-data");
   var userPasswordForm = document.querySelector(".form-user-password");
@@ -20131,45 +20156,46 @@
     const locations = JSON.parse(leafletMap.dataset.locations);
     displayMap(locations);
   }
-  if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      login(email, password);
-    });
-  }
-  if (logOutBtn) logOutBtn.addEventListener("click", logout);
-  if (userDataForm) {
-    userDataForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const form = new FormData();
-      form.append("username", document.getElementById("username").value);
-      form.append("email", document.getElementById("email").value);
-      form.append("photo", document.getElementById("photo").files[0]);
-      updateSettings(form, "data");
-    });
-  }
-  if (userPasswordForm) {
-    userPasswordForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const saveBtn = document.querySelector(".btn--save--password");
-      saveBtn.textContent = "Updating...";
-      saveBtn.disabled = true;
-      const passwordCurrent = document.getElementById("password-current").value;
-      const password = document.getElementById("password").value;
-      const passwordConfirm = document.getElementById("password-confirm").value;
-      await updateSettings(
-        { passwordCurrent, password, passwordConfirm },
-        "password"
-      );
-      document.getElementById("password-current").value = "";
-      document.getElementById("password").value = "";
-      document.getElementById("password-confirm").value = "";
-      saveBtn.textContent = "Save Password";
-      saveBtn.disabled = false;
-    });
-  }
+  loginForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    login(email, password);
+  });
+  signupForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("passwordConfirm").value;
+    signup(email, username, password, passwordConfirm);
+  });
+  logOutBtn?.addEventListener("click", logout);
+  userDataForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("username", document.getElementById("username").value);
+    form.append("email", document.getElementById("email").value);
+    updateSettings(form, "data");
+  });
+  userPasswordForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const saveBtn = document.querySelector(".btn--save--password");
+    saveBtn.textContent = "Updating...";
+    saveBtn.disabled = true;
+    const passwordCurrent = document.getElementById("password-current").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("password-confirm").value;
+    await updateSettings(
+      { passwordCurrent, password, passwordConfirm },
+      "password"
+    );
+    document.getElementById("password-current").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("password-confirm").value = "";
+    saveBtn.textContent = "Save Password";
+    saveBtn.disabled = false;
+  });
   if (bookBtn)
     bookBtn.addEventListener("click", (e) => {
       e.target.textContent = "Processing...";
@@ -20180,13 +20206,11 @@
   if (alertMessage) {
     showAlert("success", alertMessage, 15);
   }
-  if (searchBtn) {
-    searchBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("name-search-header").value;
-      window.location.href = `/game/search/${name}`;
-    });
-  }
+  searchBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name-search-header").value;
+    window.location.href = `/game/search/${name}`;
+  });
   var dropdownButton = document.getElementById("dropbtn");
   if (dropdownButton) {
     let myFunction = function() {

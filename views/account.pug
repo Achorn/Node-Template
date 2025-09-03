@@ -13,9 +13,9 @@ block content
       nav.user-view__menu
         ul.side-nav
           +navItem('#', 'Settings','settings',true)
-          +navItem('/my-tours', 'My bookings','briefcase',false)
-          +navItem('#', 'My Reviews','star',false)
-          +navItem('#', 'Billing','credit-card',false)
+          //- +navItem('/my-tours', 'My bookings','briefcase',false)
+          //- +navItem('#', 'My Reviews','star',false)
+          //- +navItem('#', 'Billing','credit-card',false)
 
         - if(user.role === 'admin')
           .admin-nav
@@ -26,7 +26,6 @@ block content
               +navItem('#', 'Manage reviews','star',false)
               +navItem('#', 'Manage bookings','briefcase',false)
       .user-view__content
-        h1 following
         .user-view__form-container
           h2.heading-secondary.ma-bt-md Your account settings
           //- Without API
@@ -44,8 +43,8 @@ block content
             .form__group.form__photo-upload
               img.form__user-photo(src=`img/users/${user.photo}`, alt='User photo')
               
-              input.form__upload(type='file' accept='image/*' id='photo',name='photo')
-              label(for='photo') Choose new photo
+              //- input.form__upload(type='file' accept='image/*' id='photo',name='photo')
+              //- label(for='photo') Choose new photo
 
             .form__group.right
               button.btn.btn--small.btn--green Save settings

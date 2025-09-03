@@ -1,5 +1,5 @@
 import "@babel/polyfill";
-import { login, logout } from "./login";
+import { login, signup, logout } from "./login";
 import { updateSettings } from "./updateSettings";
 import { displayMap } from "./leafletMap";
 import { bookTour } from "./stripe";
@@ -10,6 +10,7 @@ import { followUser, unfollowUser } from "./followingApi";
 // DOM ELEMENTS
 const leafletMap = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
+const signupForm = document.querySelector(".form--signup");
 const logOutBtn = document.querySelector(".nav__el--logout");
 const userDataForm = document.querySelector(".form-user-data");
 const userPasswordForm = document.querySelector(".form-user-password");
@@ -26,48 +27,53 @@ if (leafletMap) {
   displayMap(locations);
 }
 
-if (loginForm) {
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    login(email, password);
-  });
-}
-if (logOutBtn) logOutBtn.addEventListener("click", logout);
+loginForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  login(email, password);
+});
 
-if (userDataForm) {
-  userDataForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const form = new FormData();
-    form.append("username", document.getElementById("username").value);
-    form.append("email", document.getElementById("email").value);
-    form.append("photo", document.getElementById("photo").files[0]);
-    updateSettings(form, "data");
-  });
-}
-if (userPasswordForm) {
-  userPasswordForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const saveBtn = document.querySelector(".btn--save--password");
-    saveBtn.textContent = "Updating...";
-    saveBtn.disabled = true;
+signupForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("email").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const passwordConfirm = document.getElementById("passwordConfirm").value;
+  signup(email, username, password, passwordConfirm);
+});
 
-    const passwordCurrent = document.getElementById("password-current").value;
-    const password = document.getElementById("password").value;
-    const passwordConfirm = document.getElementById("password-confirm").value;
+logOutBtn?.addEventListener("click", logout);
 
-    await updateSettings(
-      { passwordCurrent, password, passwordConfirm },
-      "password"
-    );
-    document.getElementById("password-current").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("password-confirm").value = "";
-    saveBtn.textContent = "Save Password";
-    saveBtn.disabled = false;
-  });
-}
+userDataForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const form = new FormData();
+  form.append("username", document.getElementById("username").value);
+  form.append("email", document.getElementById("email").value);
+  // form.append("photo", document.getElementById("photo").files[0]);
+  updateSettings(form, "data");
+});
+
+userPasswordForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const saveBtn = document.querySelector(".btn--save--password");
+  saveBtn.textContent = "Updating...";
+  saveBtn.disabled = true;
+
+  const passwordCurrent = document.getElementById("password-current").value;
+  const password = document.getElementById("password").value;
+  const passwordConfirm = document.getElementById("password-confirm").value;
+
+  await updateSettings(
+    { passwordCurrent, password, passwordConfirm },
+    "password"
+  );
+  document.getElementById("password-current").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("password-confirm").value = "";
+  saveBtn.textContent = "Save Password";
+  saveBtn.disabled = false;
+});
 
 if (bookBtn)
   bookBtn.addEventListener("click", (e) => {
@@ -82,14 +88,12 @@ if (alertMessage) {
 }
 
 //game search
-if (searchBtn) {
-  searchBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("name-search-header").value;
-    //redirect to
-    window.location.href = `/game/search/${name}`;
-  });
-}
+searchBtn?.addEventListener("click", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name-search-header").value;
+  //redirect to
+  window.location.href = `/game/search/${name}`;
+});
 
 // log button funcitonality
 /* When the user clicks on the button,
