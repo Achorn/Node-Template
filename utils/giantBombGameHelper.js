@@ -57,7 +57,6 @@ module.exports.linkRelationshipsToGames = (relationships, games) => {
   relationships.forEach((rel) => {
     const game = games.find((game) => game.guid == rel.game);
     rel.gameInfo = game;
-    console.log("game!!" + game.name);
   });
   return relationships;
 };

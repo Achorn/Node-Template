@@ -51,7 +51,7 @@ const relationshipSchema = mongoose.Schema({
 relationshipSchema.index({ game: 1, user: 1 }, { unique: true });
 
 relationshipSchema.pre(/^find/, function (next) {
-  this.populate({ path: "user", select: "name photo _id" });
+  this.populate({ path: "user", select: "username photo _id" });
   next();
 });
 

@@ -39,7 +39,7 @@ mixin relationshipButton(user,relationship)
           if relationship
             a#deleteRelationship.dropbtn( data-game=game.guid data-relationship=relationship?relationship.id:''  data-rest='DELETE') remove from logs
     else 
-      button#logBtn(disabled=!!relationship).dropbtn= "Login to Log"
+      a(href='/login')#goToLogin.dropbtn= "Login to Log"
 
 
 mixin overviewBox(label, text, icon)

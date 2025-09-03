@@ -1,4 +1,6 @@
 const Tour = require("../models/tourModel");
+const Following = require("../models/followerModel");
+const Relationship = require("../models/relationshipModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const User = require("../models/userModel");
@@ -10,7 +12,6 @@ const {
   getGiantBombGames,
   linkRelationshipsToGames,
 } = require("../utils/giantBombGameHelper");
-const Relationship = require("../models/relationshipModel");
 
 exports.alerts = (req, res, next) => {
   const { alert } = req.query;
@@ -21,14 +22,37 @@ exports.alerts = (req, res, next) => {
 };
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  // 1) Get tour data from collection
-  const tours = await Tour.find();
+  // 1) Get  following data
+  if (!req.user) {
+    return res.status(200).render("overview", {
+      title: "Home Page",
+    });
+  }
+  // find friends
+  const following = await Following.find({ user: req.user.id });
+  // get relationships from all users who are being followed
+  const followingIds = following.map((fol) => fol.following);
+
+  // find activities from friends
+  let relationships = await Relationship.find({
+    user: { $in: followingIds },
+  }).sort({ updatedAt: -1 });
+
+  // get list of game ids
+  let gameIds = [...new Set(relationships.map((rel) => rel.game))];
+  gameIds = guidsToIds(gameIds);
+  console.log(gameIds);
+  const games = await getGiantBombGames(gameIds);
+
+  relationships = linkRelationshipsToGames(relationships, games);
+
+  // display game data
 
   // 2) Build template
   // 3) Render that template using tour data from 1)
   res.status(200).render("overview", {
     title: "All Tours",
-    tours,
+    activity: relationships,
   });
 });
 
