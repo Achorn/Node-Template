@@ -30,7 +30,7 @@ html {
 body {
   /* line-height: 1.6; */
   /* font-weight: 300; */
-  /* font-family: 'Lato', sans-serif; */
+  font-family: 'Lato', sans-serif;
   /* color: #777; */
   padding: 3rem;
   min-height: 100vh;
