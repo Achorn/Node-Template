@@ -1,5 +1,5 @@
 :root {
-  --section-rotate: 9vw;
+  /* --section-rotate: 9vw; */
 }
 
 ::-moz-selection {
@@ -22,16 +22,16 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 82.5%;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 body {
-  line-height: 1.6;
-  font-weight: 300;
-  font-family: 'Lato', sans-serif;
-  color: #777;
+  /* line-height: 1.6; */
+  /* font-weight: 300; */
+  /* font-family: 'Lato', sans-serif; */
+  /* color: #777; */
   padding: 3rem;
   min-height: 100vh;
   display: -webkit-box;
@@ -95,7 +95,7 @@ body {
   transform: translateX(-50%);
   z-index: 9999;
   color: #fff;
-  font-size: 1.8rem;
+  /* font-size: 1.8rem; */
   font-weight: 400;
   text-align: center;
   border-bottom-left-radius: 5px;
@@ -114,7 +114,7 @@ body {
 }
 
 .heading-secondary {
-  font-size: 2.25rem;
+  /* font-size: 2.25rem; */
   text-transform: uppercase;
   font-weight: 700;
   background-image: -webkit-gradient(linear,
@@ -137,7 +137,7 @@ body {
       from(#ff7730),
       to(#eb4d4b));
   background-image: linear-gradient(to right, #ff7730, #eb4d4b);
-  font-size: 3.5rem;
+  /* font-size: 3.5rem; */
 }
 
 .heading-primary,
@@ -164,14 +164,14 @@ body {
 }
 
 .heading-primary {
-  font-size: 5rem;
+  /* font-size: 5rem; */
   text-align: center;
   width: 70%;
   margin: 0 auto;
 }
 
 .heading-tertirary {
-  font-size: 2.75rem;
+  /* font-size: 2.75rem; */
   text-align: right;
   position: absolute;
   bottom: 1rem;
@@ -183,7 +183,7 @@ body {
 .btn,
 .btn:link,
 .btn:visited {
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
   padding: 1.4rem 3rem;
   border-radius: 10rem;
   text-transform: uppercase;
@@ -238,7 +238,7 @@ body {
 
 .btn--small {
   padding: 1.25rem 3rem !important;
-  font-size: 1.4rem !important;
+  /* font-size: 1.4rem !important; */
 }
 
 .btn-small,
@@ -246,7 +246,7 @@ body {
 .btn-small:visited {
   background-color: #55c57a;
   color: #fff;
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
   padding: 1.25rem 3rem;
   border-radius: 10rem;
   text-transform: uppercase;
@@ -395,7 +395,7 @@ body {
 }
 
 .heading-box__detail {
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
   font-weight: 700;
   text-transform: uppercase;
   display: -webkit-box;
@@ -445,7 +445,7 @@ body {
 }
 
 .description-box .description__text {
-  font-size: 1.7rem;
+  /* font-size: 1.7rem; */
 }
 
 .description-box .description__text:not(:last-child) {
@@ -1462,4 +1462,21 @@ body {
   .form__group {
     margin-bottom: 0 !important
   }
+}
+
+
+.activity-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.activity-card-game-container {
+  display: flex;
+  gap: 20px
+}
+
+.activity-card-image {
+  width: 170px
 }

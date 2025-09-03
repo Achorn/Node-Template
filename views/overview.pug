@@ -1,5 +1,22 @@
 extend base 
 
+
+mixin activityCard(activity)
+  hr
+  div.activity-container
+    h1
+      a(href=`/user/${activity.user.username}`)= `${activity.user.username}`
+    div.activity-card-game-container
+      img.activity-card-image(src=`${activity.gameInfo.image.small_url}`, alt="")
+      div
+        h3 
+          a(href=`/game/${activity.game}`)= `${activity.gameInfo.name}`
+        h4= `${activity.experience}`
+        if activity.rating 
+          h4= `rating: ${activity.rating}`
+        if activity.review 
+          h4= `review: ${activity.review}`
+
 block content 
   if !user
     main.main 
@@ -10,20 +27,11 @@ block content
   else
     h2 Recent Activity 
     each act in activity 
-      div
-        h1
-          a(href=`/user/${act.user.username}`)= `${act.user.username}`
-        h3 
-          a(href=`/game/${act.game}`)= `${act.gameInfo.name}`
-        h4= `${act.experience}`
-        if act.rating 
-          h4= `rating: ${act.rating}`
-        if act.review 
-          h4= `rating: ${act.review}`
+      +activityCard(act)
 
 
     //- .card-container 
-      
+
       //- each tour in tours
       //-   .card
       //-     .card__header

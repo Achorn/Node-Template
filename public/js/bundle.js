@@ -19970,9 +19970,7 @@
           passwordConfirm
         }
       });
-      console.log("yeah?");
       if (res.data.status === "success") {
-        console.log("success?");
         showAlert("success", "Logged in successfully!");
         window.setTimeout(() => {
           location.assign("/");
@@ -19997,7 +19995,6 @@
 
   // public/js/updateSettings.js
   var updateSettings = async (data, type) => {
-    console.log("trying update settings");
     try {
       const url = type === "password" ? "/api/v1/users/updatePassword" : "/api/v1/users/updateMe";
       const res = await axios_default({
@@ -20122,9 +20119,7 @@
     }
   };
   var unfollowUser = async (followId) => {
-    console.log("trying to unfollow...");
     const url = "/api/v1/followers/" + followId;
-    console.log(url);
     try {
       const res = await axios_default({
         method: "DELETE",
