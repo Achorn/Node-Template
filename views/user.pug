@@ -12,7 +12,7 @@ mixin followForm(selectedUserId)
 
 mixin followButton(user,selectedUser)
   if !user
-    button Sign in to follow
+    a(href="/signup")  Sign in to follow
   else
     - const followingFound = user.following.find((element) => JSON.stringify(element.following) == JSON.stringify(selectedUser._id));
     if followingFound
