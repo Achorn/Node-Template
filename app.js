@@ -26,8 +26,8 @@ const bookingController = require("./controllers/bookingController");
 const globalErrorHandler = require("./controllers/errorController");
 const AppError = require("./utils/appError");
 
-app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views")); //prevents multi-slash bug
+app.set("view engine", "pug");
 
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS

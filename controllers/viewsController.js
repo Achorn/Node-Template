@@ -24,7 +24,7 @@ exports.alerts = (req, res, next) => {
 exports.getOverview = catchAsync(async (req, res, next) => {
   // 1) Get  following data
   if (!req.user) {
-    return res.status(200).render("overview", {
+    return res.status(200).render("pages/overview", {
       title: "Home Page",
     });
   }
@@ -49,7 +49,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
   // 2) Build template
   // 3) Render that template using tour data from 1)
-  res.status(200).render("overview", {
+  res.status(200).render("pages/overview", {
     title: "All Tours",
     activity: relationships,
   });
@@ -74,15 +74,15 @@ exports.getTour = catchAsync(async (req, res, next) => {
 });
 
 exports.getLoginForm = (req, res) => {
-  res.status(200).render("login", { title: "Login" });
+  res.status(200).render("pages/login", { title: "Login" });
 };
 
 exports.getSignupForm = (req, res) => {
-  res.status(200).render("signUp", { title: "Signup" });
+  res.status(200).render("pages/signUp", { title: "Signup" });
 };
 
 exports.getAccount = (req, res) => {
-  res.status(200).render("account", { title: "Your account" });
+  res.status(200).render("pages/account", { title: "Your account" });
 };
 
 exports.getMyTours = catchAsync(async (req, res, next) => {
@@ -93,7 +93,7 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   const tourIDs = bookings.map((el) => el.tour.id);
   const tours = await Tour.find({ _id: { $in: tourIDs } }); // find all tours "in" tourIDs
 
-  res.status(200).render("overview", {
+  res.status(200).render("pages/overview", {
     title: "My Tours",
     tours,
   });
@@ -111,7 +111,9 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
       runValidators: true,
     }
   );
-  res.status(200).render("account", { title: "Account", user: updatedUser });
+  res
+    .status(200)
+    .render("pages/account", { title: "Account", user: updatedUser });
 });
 
 exports.getGameSearch = catchAsync(async (req, res, next) => {
@@ -119,7 +121,7 @@ exports.getGameSearch = catchAsync(async (req, res, next) => {
     const name = req.params.name;
     const page = req.params.page || 1;
     searchResults = await getGiantBombGameSearch(name, page);
-    res.status(200).render("search", {
+    res.status(200).render("pages/search", {
       title: `search results`,
       searchResults,
     });
@@ -138,7 +140,7 @@ exports.getGame = catchAsync(async (req, res, next) => {
   const relationships = await Relationship.find({ game: gameId });
   game.relationships = relationships;
 
-  res.status(200).render("game", {
+  res.status(200).render("pages/game", {
     title: `${game.name}`,
     game,
   });
@@ -155,7 +157,7 @@ exports.getRelationshipForm = catchAsync(async (req, res, next) => {
   let game = await getGiantBombGame(relationship.game);
   if (!game) return next(new AppError("There is no game with that id", 404));
   // let game = await getGiantBombGame(relationship.game);
-  res.status(200).render("editRelationship", {
+  res.status(200).render("pages/editRelationship", {
     // title: `edit relationship`,
     relationship,
     title: `${game.name}`,
@@ -180,7 +182,7 @@ exports.getUserPage = catchAsync(async (req, res, next) => {
   // relationships =
   relationships = linkRelationshipsToGames(relationships, games);
 
-  res.status(200).render("user", {
+  res.status(200).render("pages/user", {
     title: username,
     selectedUser,
     relationships,
