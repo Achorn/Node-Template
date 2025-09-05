@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 // name, email, photo(string), password, password-confirm
 
 const isUsername = (v) => {
-  return /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/.test(v);
+  return /^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/.test(v);
 };
 
 // schema
@@ -16,7 +16,8 @@ const userSchema = mongoose.Schema({
     type: String,
     validate: {
       validator: isUsername,
-      message: (props) => `${props.value} is not a valid username!`,
+      message: (props) =>
+        `${props.value} is not a valid username! at least 6 characters. no more than 20. only letters numbers and undescore`,
     },
     required: [true, "Please give us a username"],
     unique: true,
@@ -36,7 +37,7 @@ const userSchema = mongoose.Schema({
   photo: { type: String, default: "default.jpg" },
   role: {
     type: String,
-    enum: ["user", "guide", "lead-guide", "admin"],
+    enum: ["user", "admin"],
     default: "user",
   },
   password: {
