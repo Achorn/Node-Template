@@ -9,7 +9,9 @@
     "dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "watch": "esbuild ./public/js/index.js --bundle --outfile=./public/js/bundle.js --watch",
-    "build": "esbuild ./public/js/index.js --bundle --outfile=./public/js/bundle.js"
+    "build": "esbuild ./public/js/index.js --bundle --outfile=./public/js/bundle.js",
+    "sass": "sass sass:public/css",
+    "sass:watch": "sass --watch sass:public/css"
   },
   "author": "Joshua Achorn",
   "license": "ISC",
@@ -51,7 +53,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-react": "^7.37.5",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "sass": "^1.92.1"
   },
   "engines": {
     "node": ">=10.0.0"
