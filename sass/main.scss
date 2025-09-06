@@ -1,4 +1,5 @@
 @use "partials/header";
+@use "partials/footer";
 
 $color_1: #fff;
 $color_2: transparent;
@@ -809,50 +810,6 @@ body {
   margin: 0 auto;
   padding: 0 8rem;
 }
-.footer {
-  background-color: $background-color_2;
-  padding: 6rem 4rem 3rem 4rem;
-  font-size: 1.4rem;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-row-gap: 0.75rem;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-.footer__logo {
-  grid-row: 1 / 3;
-  -ms-flex-item-align: center;
-  align-self: center;
-  img {
-    height: 3rem;
-  }
-}
-.footer__nav {
-  list-style: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  li {
-    margin-left: 1.5rem;
-  }
-  a {
-    color: $color_3;
-    text-decoration: none !important;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-    &:hover {
-      color: $color_4;
-    }
-    &:active {
-      color: $color_4;
-    }
-  }
-}
-.footer__copyright {
-  justify-self: end;
-  color: $color_6;
-}
 
 .side-nav {
   list-style: none;
@@ -1231,58 +1188,7 @@ body {
   padding: 1rem;
 }
 @media only screen and (max-width: 62.5em) {
-  .header {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-  .header__logo {
-    -webkit-box-ordinal-group: 0;
-    -ms-flex-order: -1;
-    order: -1;
-    margin-bottom: 1.5rem;
-    position: relative;
-    left: unset;
-    transform: unset;
-  }
   .nav--tours {
     margin-bottom: 1.5rem;
-  }
-}
-@media only screen and (max-width: 50em) {
-  .footer {
-    grid-template-columns: 1fr;
-    grid-row-gap: 1.25rem;
-    justify-items: center;
-  }
-  .footer__logo {
-    grid-row: 1;
-  }
-  .footer__copyright {
-    justify-self: center;
-  }
-}
-@media only screen and (max-width: 37.5em) {
-  .nav {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-  .nav--tours {
-    margin-bottom: 0;
-  }
-  .nav__el {
-    &:not(:last-child) {
-      margin-right: 0;
-      margin-bottom: 1.2rem;
-    }
-  }
-  .nav__search {
-    -webkit-box-ordinal-group: 0;
-    -ms-flex-order: -1;
-    order: -1;
-    margin-bottom: 1.2rem;
   }
 }
