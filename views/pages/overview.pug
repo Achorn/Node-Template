@@ -2,20 +2,21 @@ extends ../base
 
 
 mixin activityCard(activity)
-  hr
-  div.activity-container
-    h1
-      a(href=`/user/${activity.user.username}`)= `${activity.user.username}`
-    div.activity-card-game-container
-      img.activity-card-image(src=`${activity.gameInfo.image.small_url}`, alt="")
-      div
-        h3 
-          a(href=`/game/${activity.game}`)= `${activity.gameInfo.name}`
-        h4= `${activity.experience}`
-        if activity.rating 
-          h4= `rating: ${activity.rating}`
-        if activity.review 
-          h4= `review: ${activity.review}`
+  .card-activity-container
+    hr
+    div.activity-container
+      h2
+        a(href=`/user/${activity.user.username}`)= `${activity.user.username}`
+      div.activity-card-game-container
+        img.activity-card-image(src=`${activity.gameInfo.image.small_url}`, alt="")
+        div
+          h3 
+            a(href=`/game/${activity.game}`)= `${activity.gameInfo.name}`
+          h4= `${activity.experience}`
+          if activity.rating 
+            h4= `rating: ${activity.rating}`
+          if activity.review 
+            h4= `review: ${activity.review}`
 
 block content 
   if !user

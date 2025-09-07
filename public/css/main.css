@@ -343,6 +343,7 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  color: #233529;
 }
 
 .main {
@@ -352,6 +353,14 @@ body {
   -ms-flex: 1;
   flex: 1;
   position: relative;
+}
+
+a {
+  color: #233529;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 .flex {
@@ -1478,6 +1487,12 @@ body {
   .nav--tours {
     margin-bottom: 1.5rem;
   }
+}
+.card-activity-container {
+  padding-top: 1rem;
+}
+.card-activity-container h2 {
+  padding-top: 0.5rem;
 }
 
 /*# sourceMappingURL=main.css.map */

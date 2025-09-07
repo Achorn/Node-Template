@@ -76,6 +76,7 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  color: #233529;
 }
 .main {
   background-color: $background-color_2;
@@ -84,6 +85,13 @@ body {
   -ms-flex: 1;
   flex: 1;
   position: relative;
+}
+a {
+  color: #233529;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .flex {
   display: -webkit-box;
@@ -1197,5 +1205,12 @@ body {
 @media only screen and (max-width: 62.5em) {
   .nav--tours {
     margin-bottom: 1.5rem;
+  }
+}
+
+.card-activity-container {
+  padding-top: 1rem;
+  h2 {
+    padding-top: 0.5rem;
   }
 }
