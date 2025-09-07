@@ -18,6 +18,23 @@ const DB = process.env.DATABASE.replace(
 );
 const app = require("./app");
 
+// HOT RELOAD FAIL
+// if (process.env.NODE_ENV === "development") {
+//   const browserSync = require("browser-sync").create();
+//   const connectBrowserSync = require("connect-browser-sync");
+
+//   browserSync.init({
+//     server: {
+//       baseDir: "./public", // Directory containing your static files
+//     },
+//     // proxy: "http://localhost:3000", // Your Express app's port
+//     files: ["public/**/*.*", "views/**/*.pug"], // Files to watch for changes
+//     port: 3001, // BrowserSync UI port
+//     open: false, // Don't open a new browser window automatically
+//   });
+//   app.use(connectBrowserSync(browserSync));
+// }
+
 mongoose.connect(DB).then(() => console.log("DB connection successful!"));
 
 // Description and validation

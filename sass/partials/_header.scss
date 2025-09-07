@@ -1,4 +1,4 @@
-$background-color_9: #444;
+$background-color_9: #526c5c;
 $color_5: #f7f7f7;
 $font-family_2: inherit;
 $background-color_2: #f7f7f7;
@@ -7,8 +7,12 @@ $border-color_1: #f7f7f7;
 $color_6: #999;
 
 .header {
+  // position: fixed;
+  position: sticky;
+  top: 0;
   background-color: $background-color_9;
-  position: relative;
+  width: 100vw;
+  // position: relative;
   z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -22,7 +26,7 @@ $color_6: #999;
 }
 .header__contents {
   box-sizing: border-box;
-  height: 50px;
+  height: 58px;
   margin: 0 auto;
   width: 100%;
   max-width: 1220px;
@@ -44,10 +48,44 @@ $color_6: #999;
   -ms-flex: 0 1 40%;
   flex: 0 1 40%;
 }
+
+.form--search {
+  position: relative;
+  .form__input {
+    // background: #ffffff;
+    border: #3b5043 1px solid;
+    border-radius: 3px;
+  }
+  .btn {
+    position: absolute;
+    // height: 40px;
+    aspect-ratio: 1;
+    // background-color: lightblue;
+
+    border-radius: 50;
+    height: 30px;
+    height: 30px;
+    width: auto;
+
+    // width: 30px;
+    right: 2px;
+    // background-color: red;
+
+    mask-repeat: no-repeat;
+    background-color: none;
+
+    background-image: url("/img/icons/search-svgrepo-com.svg");
+    background-size: contain; /* Adjust as needed: 'contain', '100% 100%', etc. */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image within the button */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Indicate it's clickable */
+  }
+}
 .nav--user {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 40%;
-  flex: 0 1 40%;
+  // -webkit-box-flex: 0;
+  // -ms-flex: 0 1 40%;
+  // flex: 0 1 40%;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -198,15 +236,6 @@ $color_6: #999;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-  }
-  .header__logo {
-    -webkit-box-ordinal-group: 0;
-    -ms-flex-order: -1;
-    order: -1;
-    margin-bottom: 1.5rem;
-    position: relative;
-    left: unset;
-    transform: unset;
   }
 }
 
