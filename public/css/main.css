@@ -343,7 +343,7 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  color: #233529;
+  color: #333834;
 }
 
 .main {
@@ -356,7 +356,7 @@ body {
 }
 
 a {
-  color: #233529;
+  color: #333834;
   text-decoration: none;
 }
 a:hover {
