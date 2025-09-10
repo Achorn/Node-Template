@@ -157,3 +157,28 @@ unfollowForm?.addEventListener("submit", async (e) => {
   const followingId = document.getElementById("followingId").value;
   unfollowUser(followingId);
 });
+
+//profile nav dropdown
+const profileDropdown = document.getElementById("profile-dropdown");
+//get button
+const profileBtn = document.getElementById("profile-dropdown-btn");
+
+profileBtn?.addEventListener("click", (e) => {
+  console.log("clicked");
+  profileDropdownFunction();
+});
+
+const profileDropdownFunction = () => {
+  // profileDropdown.classList.toggle("show");
+  profileDropdown.classList.toggle("show");
+};
+// get dropdown
+// add event listener for
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches("#profile-dropdown-btn")) {
+    if (profileDropdown.classList.contains("show")) {
+      profileDropdown.classList.remove("show");
+    }
+  }
+};

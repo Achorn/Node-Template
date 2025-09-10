@@ -11,10 +11,21 @@ header.header
 
     nav.nav.nav--user 
       if user
-        a.nav__el.nav__el--logout Log out
-        a.nav__el(href=`/user/${user.username}`)
-          img.nav__user-img(src=`/img/users/${user.photo}`, alt=`Photo of ${user.username}`)
-          span= `${user.username}`
+        //- a.nav__el.nav__el--logout Log out
+        .profile-container
+          //- a.nav__el(href=`/user/${user.username}`)
+          //- button.nav__user-img#profile-dropdown-btn
+          img.nav__user-img#profile-dropdown-btn(src=`/img/users/${user.photo}`, alt=`Photo of ${user.username}`)
+          .profile-dropdown#profile-dropdown
+              .nav-item
+                span.profile-username= `${user.username}`
+              ul.profile-dropdown-list
+                li
+                  a.nav-item(href=`/user/${user.username}`) profile 
+                li
+                  a.nav-item(href=`/me`) settings
+                li
+                  a.nav-item.nav__el--logout Log out
       else
         a.nav__el(href='/login') Log in
         a.nav__el.nav__el--cta(href='/signup') Sign up
