@@ -7,7 +7,8 @@ mixin activityCard(activity)
     h1
       //- a(href=`/user/${activity.user.username}`)= `${activity.user.username}`
     div.activity-card-game-container
-      img.activity-card-image(src=`${activity.gameInfo.image.small_url}`, alt="")
+      a(href=`/game/${activity.game}`)
+        img.activity-card-image(src=`${activity.gameInfo.image.small_url}`, alt="")
       div
         h3 
           a(href=`/game/${activity.game}`)= `${activity.gameInfo.name}`

@@ -20256,6 +20256,22 @@
     const followingId = document.getElementById("followingId").value;
     unfollowUser(followingId);
   });
+  var profileDropdown = document.getElementById("profile-dropdown");
+  var profileBtn = document.getElementById("profile-dropdown-btn");
+  profileBtn?.addEventListener("click", (e) => {
+    console.log("clicked");
+    profileDropdownFunction();
+  });
+  var profileDropdownFunction = () => {
+    profileDropdown.classList.toggle("show");
+  };
+  window.onclick = function(event) {
+    if (!event.target.matches("#profile-dropdown-btn")) {
+      if (profileDropdown.classList.contains("show")) {
+        profileDropdown.classList.remove("show");
+      }
+    }
+  };
 })();
 /*! Bundled license information:
 
