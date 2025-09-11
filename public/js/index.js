@@ -182,3 +182,28 @@ window.onclick = function (event) {
     }
   }
 };
+
+//mobile search dropdown
+
+//profile nav dropdown
+const mobileSearchDropdown = document.getElementById(
+  "mobile__search__dropdown"
+);
+//get button
+const mobileSearchDrowdownBtn = document.getElementById(
+  "search__dropdown__btn"
+);
+
+mobileSearchDrowdownBtn?.addEventListener("click", (e) => {
+  console.log("clicked");
+  mobileSearchDropdownFunction();
+});
+
+const mobileSearchDropdownFunction = () => {
+  console.log("function");
+  // profileDropdown.classList.toggle("show");
+  mobileSearchDropdown.classList.toggle("show");
+};
+// get dropdown
+// add event listener for
+// Close the dropdown menu if the user clicks outside of it

@@ -20272,6 +20272,20 @@
       }
     }
   };
+  var mobileSearchDropdown = document.getElementById(
+    "mobile__search__dropdown"
+  );
+  var mobileSearchDrowdownBtn = document.getElementById(
+    "search__dropdown__btn"
+  );
+  mobileSearchDrowdownBtn?.addEventListener("click", (e) => {
+    console.log("clicked");
+    mobileSearchDropdownFunction();
+  });
+  var mobileSearchDropdownFunction = () => {
+    console.log("function");
+    mobileSearchDropdown.classList.toggle("show");
+  };
 })();
 /*! Bundled license information:
 

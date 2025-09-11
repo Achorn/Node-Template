@@ -26,6 +26,31 @@
   align-items: center;
 }
 
+.search__dropdown__btn {
+  display: none;
+}
+.search__dropdown__btn svg {
+  height: 1.9rem;
+  width: 1.9rem;
+  fill: #f7f7f7;
+}
+.search__dropdown__btn {
+  cursor: pointer;
+}
+
+.mobile__search__dropdown {
+  display: none;
+}
+
+.header__search {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.header__search img {
+  height: 3.5rem;
+}
+
 .nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -239,13 +264,32 @@
   font-weight: 700;
 }
 
-@media only screen and (max-width: 62.5em) {
+/* Styles for screens up to 600px wide (e.g., most phones in portrait) */
+@media only screen and (max-width: 600px) {
   .header {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    padding: 0 5px;
   }
+  .header__search {
+    display: none;
+  }
+  .search__dropdown__btn {
+    display: block;
+  }
+  .mobile__search__dropdown {
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100vw;
+    padding: 5px;
+  }
+  .mobile__search__dropdown .form--search {
+    width: 100%;
+  }
+  /* Mobile-specific styles here */
+}
+/* Styles for screens between 600px and 768px (e.g., larger phones in landscape, small tablets) */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  /* Styles for intermediate screens */
 }
 @media only screen and (max-width: 37.5em) {
   .nav {
@@ -664,15 +708,6 @@ a:hover {
   outline: none;
   outline: 3px solid #55c57a;
   outline-offset: 3px;
-}
-
-.header__logo {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-.header__logo img {
-  height: 3.5rem;
 }
 
 .section-header {
@@ -1516,6 +1551,11 @@ a:hover {
   width: 170px;
 }
 
+@media only screen and (max-width: 600px) {
+  .contentContainer {
+    padding: 0 5px;
+  }
+}
 @media only screen and (max-width: 62.5em) {
   .nav--tours {
     margin-bottom: 1.5rem;
