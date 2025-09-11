@@ -385,14 +385,6 @@ a {
   }
 }
 
-.header__logo {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  img {
-    height: 3.5rem;
-  }
-}
 .section-header {
   position: relative;
   aspect-ratio: 16/9;
@@ -1191,6 +1183,12 @@ a {
 }
 .activity-card-image {
   width: 170px;
+}
+
+@media only screen and (max-width: 600px) {
+  .contentContainer {
+    padding: 0 5px;
+  }
 }
 
 @media only screen and (max-width: 62.5em) {
