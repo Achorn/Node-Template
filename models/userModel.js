@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require("bcryptjs");
-const Following = require("./followerModel");
+// const Following = require("./followerModel");
 
 // name, email, photo(string), password, password-confirm
 
@@ -108,20 +108,21 @@ userSchema.pre(/^find/, async function (next) {
   next();
 });
 
-userSchema.post("save", async function (doc) {
-  // `this` refers to the document that was just saved
-  // `doc` is also the saved document
-  console.log("following gamurel");
-  try {
-    // follow gamurel account
-    await Following.create({
-      user: doc._id,
-      following: "68bb1dc4a84ec9bc3d4b11b4",
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
+// userSchema.post("save", async function (doc) {
+//   // `this` refers to the document that was just saved
+//   // `doc` is also the saved document
+//   console.log("following gamurel");
+//   try {
+//     // follow gamurel account
+//     await Following.create({
+//       user: doc._id,
+//       following: "68bb1dc4a84ec9bc3d4b11b4",
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
