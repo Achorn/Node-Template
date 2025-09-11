@@ -267,7 +267,7 @@
 /* Styles for screens up to 600px wide (e.g., most phones in portrait) */
 @media only screen and (max-width: 600px) {
   .header {
-    padding: 0 5px;
+    padding: 0 10px;
   }
   .header__search {
     display: none;
@@ -1552,8 +1552,17 @@ a:hover {
 }
 
 @media only screen and (max-width: 600px) {
+  .main {
+    padding: 0px;
+  }
   .contentContainer {
-    padding: 0 5px;
+    padding: 10px 10px;
+  }
+  .card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .login-form {
+    padding: 2rem 1rem;
   }
 }
 @media only screen and (max-width: 62.5em) {

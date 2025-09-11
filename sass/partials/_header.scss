@@ -290,7 +290,7 @@ $color_6: #999;
 /* Styles for screens up to 600px wide (e.g., most phones in portrait) */
 @media only screen and (max-width: 600px) {
   .header {
-    padding: 0 5px;
+    padding: 0 10px;
   }
   .header__search {
     display: none;
