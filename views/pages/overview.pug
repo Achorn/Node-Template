@@ -22,10 +22,14 @@ mixin activityCard(activity)
 block content 
   if !user
     main.main 
-      h1 Gamurel is a place to keep track of your games and see what your friends are playing 
-      h2 This home page will soon show a list of your friends recent activity
-      h2 to start, use the search bar above to look for games
-      h2 this website is phone screen hesitant and not really made to be doom scrolled
+      h2 Gamurel is a place to keep track of your games and see what your friends are playing 
+      br
+      h3 This home page will soon be filled with a list of your friends activity once you start following them.
+      br
+      h3 To begin, use the search bar above to look for games.
+      br
+      h3 Happy logging!
+      
   else
     h2 Recent Activity 
     each act in activity 
