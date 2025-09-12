@@ -1,5 +1,6 @@
 @use "partials/header";
 @use "partials/footer";
+@use "pages/game.scss";
 
 $color_1: #fff;
 $color_2: transparent;
@@ -459,11 +460,11 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  > * {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-  }
+  // > * {
+  //   -webkit-box-flex: 0;
+  //   -ms-flex: 0 0 50%;
+  //   flex: 0 0 50%;
+  // }
 }
 .description-box {
   .description {
@@ -474,54 +475,6 @@ a {
       margin-bottom: 2rem;
     }
   }
-}
-.overview-box {
-  background-color: $background-color_2;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-.overview-box__group {
-  display: flex;
-  flex-direction: column;
-}
-.overview-box__detail {
-  font-size: 1.5rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: 400;
-  svg {
-    margin-right: 1.25rem;
-  }
-  &:not(:last-child) {
-    margin-bottom: 2.25rem;
-  }
-}
-.overview-box__icon {
-  height: 2.25rem;
-  width: 2.25rem;
-  fill: #55c57a;
-}
-.overview-box__label {
-  font-weight: 700;
-  margin-right: 2.25rem;
-  text-transform: uppercase;
-  font-size: 1.4rem;
-}
-.overview-box__text {
-  text-transform: capitalize;
-}
-.overview-box__img {
-  border-radius: 50%;
-  height: 3.5rem;
-  margin-right: 1.25rem;
 }
 .section-pictures {
   display: -webkit-box;

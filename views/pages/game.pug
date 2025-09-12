@@ -13,7 +13,7 @@ block append head
 mixin reviewCard(review)
   hr
   div.activity-container
-    h1
+    h3
       a(href=`/user/${review.user.username}`)= `${review.user.username}`
     h4= `${review.experience}`
     if review.rating 
@@ -57,7 +57,7 @@ block content
     .overview-box
       div
         .overview-box__group.ma-bt-lg
-          h2.heading-secondary.ma-bt-lg= `${game.name}`
+          h3.heading-secondary.ma-bt-lg= `${game.name}`
 
           img.game__image(src=`${game.image.small_url}`)
         
@@ -68,7 +68,9 @@ block content
         //- if relationship
           a(href=`/relationship/edit/${relationship.id}`) Review
         if !!userRelationship && userRelationship.experience === 'played'
-          a(href=`/relationship/edit/${userRelationship.id}`) Review
+          a.review--button(href=`/relationship/edit/${userRelationship.id}`) Review
+  br
+  h2 Activity
   div
     each review in gameReviews 
       +reviewCard(review)
