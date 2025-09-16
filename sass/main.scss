@@ -15,6 +15,7 @@ $color_10: white;
 $color_11: black;
 $font-family_1: "Lato", sans-serif;
 $font-family_2: inherit;
+$background-color-primary: #526c5c;
 $background-color_1: #55c57a;
 $background-color_2: #f7f7f7;
 $background-color_3: #e0e0e0;
@@ -195,37 +196,38 @@ a {
   }
 }
 .heading-tertirary {
-  color: $color_1;
+  color: $primary-color;
   text-transform: uppercase;
   font-weight: 300;
-  text-align: right;
-  position: absolute;
-  bottom: 1rem;
-  right: 2rem;
-  width: 70%;
-  z-index: 10;
+  // padding: 4px; // text-align: right;
+
+  // position: absolute;
+  // bottom: 1rem;
+  // right: 2rem;
+  // width: 70%;
+  // z-index: 10;
   span {
-    padding: 1rem 1.5rem;
-    line-height: 1;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    background-image: -webkit-gradient(
-      linear,
-      left top,
-      right bottom,
-      from(rgba(125, 213, 111, 0.85)),
-      to(rgba(40, 180, 135, 0.85))
-    );
-    background-image: linear-gradient(
-      to bottom right,
-      rgba(125, 213, 111, 0.85),
-      rgba(40, 180, 135, 0.85)
-    );
+    // padding: 1rem 1.5rem;
+    // line-height: 1;
+    // -webkit-box-decoration-break: clone;
+    // box-decoration-break: clone;
+    // background-image: -webkit-gradient(
+    //   linear,
+    //   left top,
+    //   right bottom,
+    //   from(rgba(125, 213, 111, 0.85)),
+    //   to(rgba(40, 180, 135, 0.85))
+    // );
+    // background-image: linear-gradient(
+    //   to bottom right,
+    //   rgba(125, 213, 111, 0.85),
+    //   rgba(40, 180, 135, 0.85)
+    // );
   }
 }
 .btn {
   padding: 0.75rem 1.5rem;
-  border-radius: 10rem;
+  border-radius: 1rem;
   text-transform: uppercase;
   display: inline-block;
   text-decoration: none;
@@ -239,7 +241,7 @@ a {
   cursor: pointer;
   &:link {
     padding: 0.75rem 1.5rem;
-    border-radius: 10rem;
+    border-radius: 2px;
     text-transform: uppercase;
     display: inline-block;
     text-decoration: none;
@@ -292,14 +294,15 @@ a {
   }
 }
 .btn--green {
-  background-color: $background-color_1;
+  background-color: $background-color-primary;
   color: $color_1;
   &::after {
     background-color: $background-color_1;
   }
 }
 .btn--small {
-  padding: 1.25rem 3rem !important;
+  // padding: 1.25rem 3rem !important;
+  border-radius: 1px;
 }
 .btn-small {
   background-color: $background-color_1;
@@ -318,7 +321,7 @@ a {
     background-color: $background-color_1;
     color: $color_1;
     padding: 1.25rem 3rem;
-    border-radius: 10rem;
+    border-radius: 2px;
     text-transform: uppercase;
     position: relative;
     -webkit-transition: all 0.2s;
@@ -901,11 +904,13 @@ a {
   width: 100%;
 }
 .card__details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-row-gap: 1.75rem;
-  grid-column-gap: 2rem;
-  padding: 2.5rem 3rem;
+  padding: 1rem 1rem;
+
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  // grid-row-gap: 1.75rem;
+  // grid-column-gap: 2rem;
+  // padding: 2.5rem 3rem;
 }
 .card__sub-heading {
   font-size: 1.2rem;
@@ -939,7 +944,7 @@ a {
 }
 .card__footer {
   background-color: $background-color_2;
-  padding: 2.5rem 3rem;
+  padding: 1rem 1rem;
   border-top: 1px solid #f1f1f1;
   font-size: 1.4rem;
   display: grid;
@@ -965,6 +970,9 @@ a {
   transform: translate(-50%, -50%);
   max-width: 80rem;
   text-align: center;
+}
+.flex {
+  display: flex;
 }
 .error__title {
   display: -webkit-box;
@@ -1138,6 +1146,24 @@ a {
   width: 170px;
 }
 
+@media only screen and (max-width: 1080px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 62.5em) {
+  .nav--tours {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.card-activity-container {
+  padding-top: 1rem;
+  h2 {
+    padding-top: 0.5rem;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .main {
     padding: 0px;
@@ -1150,18 +1176,5 @@ a {
   }
   .login-form {
     padding: 2rem 1rem;
-  }
-}
-
-@media only screen and (max-width: 62.5em) {
-  .nav--tours {
-    margin-bottom: 1.5rem;
-  }
-}
-
-.card-activity-container {
-  padding-top: 1rem;
-  h2 {
-    padding-top: 0.5rem;
   }
 }

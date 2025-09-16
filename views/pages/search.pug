@@ -10,10 +10,15 @@ block content
             .card__picture
               .card__picture-overlay &nbsp;
               img.card__picture-img(src=`${tour.image.original_url}`, alt=`${tour.name}`)
-            h3.heading-tertirary
-              span= tour.name
 
           .card__details
+            h3.heading-tertirary
+              span= tour.name
+            if (tour.original_release_date)
+              .flex 
+                h4 Released:
+                - const date = new Date(tour.original_release_date).toLocaleString('en-us',{month: 'numeric',day:'numeric', year: 'numeric'})
+                p= ` ${date}`
             //- h4.card__sub-heading= `${tour.difficulty} ${tour.duration}-day tour`
             //- p.card__text= tour.summary
             //- .card__data

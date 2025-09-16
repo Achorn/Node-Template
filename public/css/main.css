@@ -607,28 +607,13 @@ a:hover {
 }
 
 .heading-tertirary {
-  color: #fff;
+  color: #333834;
   text-transform: uppercase;
   font-weight: 300;
-  text-align: right;
-  position: absolute;
-  bottom: 1rem;
-  right: 2rem;
-  width: 70%;
-  z-index: 10;
 }
-.heading-tertirary span {
-  padding: 1rem 1.5rem;
-  line-height: 1;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(125, 213, 111, 0.85)), to(rgba(40, 180, 135, 0.85)));
-  background-image: linear-gradient(to bottom right, rgba(125, 213, 111, 0.85), rgba(40, 180, 135, 0.85));
-}
-
 .btn {
   padding: 0.75rem 1.5rem;
-  border-radius: 10rem;
+  border-radius: 1rem;
   text-transform: uppercase;
   display: inline-block;
   text-decoration: none;
@@ -643,7 +628,7 @@ a:hover {
 }
 .btn:link {
   padding: 0.75rem 1.5rem;
-  border-radius: 10rem;
+  border-radius: 2px;
   text-transform: uppercase;
   display: inline-block;
   text-decoration: none;
@@ -680,7 +665,7 @@ a:hover {
 }
 
 .btn--green {
-  background-color: #55c57a;
+  background-color: #526c5c;
   color: #fff;
 }
 .btn--green::after {
@@ -688,7 +673,7 @@ a:hover {
 }
 
 .btn--small {
-  padding: 1.25rem 3rem !important;
+  border-radius: 1px;
 }
 
 .btn-small {
@@ -709,7 +694,7 @@ a:hover {
   background-color: #55c57a;
   color: #fff;
   padding: 1.25rem 3rem;
-  border-radius: 10rem;
+  border-radius: 2px;
   text-transform: uppercase;
   position: relative;
   -webkit-transition: all 0.2s;
@@ -1293,11 +1278,7 @@ a:hover {
 }
 
 .card__details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-row-gap: 1.75rem;
-  grid-column-gap: 2rem;
-  padding: 2.5rem 3rem;
+  padding: 1rem 1rem;
 }
 
 .card__sub-heading {
@@ -1336,7 +1317,7 @@ a:hover {
 
 .card__footer {
   background-color: #f7f7f7;
-  padding: 2.5rem 3rem;
+  padding: 1rem 1rem;
   border-top: 1px solid #f1f1f1;
   font-size: 1.4rem;
   display: grid;
@@ -1366,6 +1347,10 @@ a:hover {
   transform: translate(-50%, -50%);
   max-width: 80rem;
   text-align: center;
+}
+
+.flex {
+  display: flex;
 }
 
 .error__title {
@@ -1556,6 +1541,23 @@ a:hover {
   width: 170px;
 }
 
+@media only screen and (max-width: 1080px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 62.5em) {
+  .nav--tours {
+    margin-bottom: 1.5rem;
+  }
+}
+.card-activity-container {
+  padding-top: 1rem;
+}
+.card-activity-container h2 {
+  padding-top: 0.5rem;
+}
+
 @media only screen and (max-width: 600px) {
   .main {
     padding: 0px;
@@ -1569,17 +1571,6 @@ a:hover {
   .login-form {
     padding: 2rem 1rem;
   }
-}
-@media only screen and (max-width: 62.5em) {
-  .nav--tours {
-    margin-bottom: 1.5rem;
-  }
-}
-.card-activity-container {
-  padding-top: 1rem;
-}
-.card-activity-container h2 {
-  padding-top: 0.5rem;
 }
 
 /*# sourceMappingURL=main.css.map */
