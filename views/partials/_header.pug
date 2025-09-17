@@ -1,25 +1,30 @@
+
+
+mixin desktopSearch()
+  .header__search
+    form.form--search
+      //- .form__group.ma-bt-md
+      input#name-search-header-desktop.form__input(type='text', placeholder='name of game', required, minlength='1')
+      //- .form__group
+      button.btn#search-game-desktop
+
+mixin mobileSearch()
+  .mobile__search__dropdown#mobile__search__dropdown 
+    form.form--search
+      //- .form__group.ma-bt-md
+      input#name-search-header-mobile.form__input(type='text', placeholder='name of game', required, minlength='1')
+      //- .form__group
+      button.btn#search-game-mobile
+
 header.header   
   .header__contents
     .search__dropdown__btn#search__dropdown__btn 
       svg
         use(xlink:href=`/img/icons.svg#icon-search`)
-
-    .mobile__search__dropdown#mobile__search__dropdown 
-      form.form--search
-        //- .form__group.ma-bt-md
-        input#name-search-header.form__input(type='text', placeholder='name of game', required, minlength='1')
-        //- .form__group
-        button.btn#search-game 
-
+    +mobileSearch()
     nav.nav.nav-tours
       a.nav__el(href="/") Gamurel
-    .header__search
-      form.form--search
-        //- .form__group.ma-bt-md
-        input#name-search-header.form__input(type='text', placeholder='name of game', required, minlength='1')
-        //- .form__group
-        button.btn#search-game 
-
+    +desktopSearch()
     nav.nav.nav--user 
       if user
         //- a.nav__el.nav__el--logout Log out
@@ -28,15 +33,15 @@ header.header
           //- button.nav__user-img#profile-dropdown-btn
           img.nav__user-img#profile-dropdown-btn(src=`/img/users/${user.photo}`, alt=`Photo of ${user.username}`)
           .profile-dropdown#profile-dropdown
-              .nav-item
-                span.profile-username= `${user.username}`
-              ul.profile-dropdown-list
-                li
-                  a.nav-item(href=`/user/${user.username}`) profile 
-                li
-                  a.nav-item(href=`/me`) settings
-                li
-                  a.nav-item.nav__el--logout Log out
+            .nav-item
+              span.profile-username= `${user.username}`
+            ul.profile-dropdown-list
+              li
+                a.nav-item(href=`/user/${user.username}`) profile 
+              li
+                a.nav-item(href=`/me`) settings
+              li
+                a.nav-item.nav__el--logout Log out
       else
         a.nav__el(href='/login') Log in
         //- a.nav__el.nav__el--cta(href='/signup') Sign up

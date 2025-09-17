@@ -20142,7 +20142,8 @@
   var userDataForm = document.querySelector(".form-user-data");
   var userPasswordForm = document.querySelector(".form-user-password");
   var bookBtn = document.getElementById("book-tour");
-  var searchBtn = document.getElementById("search-game");
+  var searchBtnMobile = document.getElementById("search-game-mobile");
+  var searchBtnDesktop = document.getElementById("search-game-desktop");
   var logBtn = document.getElementById("logBtn");
   var reviewForm = document.querySelector(".form--review");
   var followForm = document.querySelector(".form--follow");
@@ -20201,9 +20202,14 @@
   if (alertMessage) {
     showAlert("success", alertMessage, 15);
   }
-  searchBtn?.addEventListener("click", (e) => {
+  searchBtnMobile?.addEventListener("click", (e) => {
     e.preventDefault();
-    const name = document.getElementById("name-search-header").value;
+    const name = document.getElementById("name-search-header-mobile").value;
+    window.location.href = `/game/search/${name}`;
+  });
+  searchBtnDesktop?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name-search-header-desktop").value;
     window.location.href = `/game/search/${name}`;
   });
   var dropdownButton = document.getElementById("dropbtn");

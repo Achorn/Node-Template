@@ -15,7 +15,8 @@ const logOutBtn = document.querySelector(".nav__el--logout");
 const userDataForm = document.querySelector(".form-user-data");
 const userPasswordForm = document.querySelector(".form-user-password");
 const bookBtn = document.getElementById("book-tour");
-const searchBtn = document.getElementById("search-game");
+const searchBtnMobile = document.getElementById("search-game-mobile");
+const searchBtnDesktop = document.getElementById("search-game-desktop");
 const logBtn = document.getElementById("logBtn");
 const reviewForm = document.querySelector(".form--review");
 const followForm = document.querySelector(".form--follow");
@@ -88,10 +89,14 @@ if (alertMessage) {
 }
 
 //game search
-searchBtn?.addEventListener("click", (e) => {
+searchBtnMobile?.addEventListener("click", (e) => {
   e.preventDefault();
-  const name = document.getElementById("name-search-header").value;
-  //redirect to
+  const name = document.getElementById("name-search-header-mobile").value;
+  window.location.href = `/game/search/${name}`;
+});
+searchBtnDesktop?.addEventListener("click", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name-search-header-desktop").value;
   window.location.href = `/game/search/${name}`;
 });
 
